@@ -45,7 +45,7 @@ onMounted(async () => {
 
 <template>
   <BackButton />
-  <section v-if="!state.isLoading" class="bg-green-50">
+  <section v-if="!state.isLoading" class="bg-indigo-50">
     <div class="container m-auto py-10 px-6">
       <div class="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
         <main>
@@ -57,13 +57,13 @@ onMounted(async () => {
             <div
               class="text-gray-500 mb-4 flex align-middle justify-center md:justify-start"
             >
-              <i class="pi pi-map-marker text-xl text-orange-700 mr-2"></i>
-              <p class="text-orange-700">{{ state.job.location }}</p>
+              <i class="pi pi-map-marker text-xl text-orange-500 mr-2"></i>
+              <p class="text-orange-500">{{ state.job.location }}</p>
             </div>
           </div>
 
           <div class="bg-white p-6 rounded-lg shadow-md mt-6">
-            <h3 class="text-green-800 text-lg font-bold mb-6">
+            <h3 class="text-indigo-800 text-lg font-bold mb-6">
               Job Description
             </h3>
 
@@ -71,7 +71,7 @@ onMounted(async () => {
               {{ state.job.description }}
             </p>
 
-            <h3 class="text-green-800 text-lg font-bold mb-2">Salary</h3>
+            <h3 class="text-indigo-800 text-lg font-bold mb-2">Salary</h3>
 
             <p class="mb-4">{{ state.job.salary }} / Year</p>
           </div>
@@ -93,13 +93,13 @@ onMounted(async () => {
 
             <h3 class="text-xl">Contact Email:</h3>
 
-            <p class="my-2 bg-green-100 p-2 font-bold">
+            <p class="my-2 bg-indigo-100 p-2 font-bold">
               {{ state.job.company.contactEmail }}
             </p>
 
             <h3 class="text-xl">Contact Phone:</h3>
 
-            <p class="my-2 bg-green-100 p-2 font-bold">
+            <p class="my-2 bg-indigo-100 p-2 font-bold">
               {{ state.job.company.contactPhone }}
             </p>
           </div>
@@ -109,7 +109,7 @@ onMounted(async () => {
             <h3 class="text-xl font-bold mb-6">Manage Job</h3>
             <RouterLink
               :to="`/jobs/edit/${state.job.id}`"
-              class="bg-green-500 hover:bg-green-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
+              class="bg-indigo-500 hover:bg-indigo-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
               >Edit Job</RouterLink
             >
             <button

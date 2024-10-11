@@ -47,7 +47,7 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <section class="bg-green-50">
+  <section class="bg-indigo-50">
     <div class="container m-auto max-w-2xl py-24">
       <div
         class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0"
@@ -205,7 +205,7 @@ const handleSubmit = async () => {
 
           <div>
             <button
-              class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+              class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
               type="submit"
             >
               Add Job
