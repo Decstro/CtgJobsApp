@@ -1,6 +1,6 @@
 <script setup>
 import router from '@/router';
-import { reactive, onMounted } from 'vue';
+import { reactive, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useToast } from 'vue-toastification';
 import axios from 'axios';
@@ -28,7 +28,26 @@ const state = reactive({
   isLoading: true,
 });
 
+// Debounced company description
+const companyDescriptionInput = ref('');
+let debounceTimer = null;
+
 const toast = useToast();
+
+const handleCompanyDescriptionInput = (event) => {
+  const value = event.target.value;
+  companyDescriptionInput.value = value;
+
+  // Clear existing timer
+  if (debounceTimer) {
+    clearTimeout(debounceTimer);
+  }
+
+  // Set new timer - update form after 500ms of no typing
+  debounceTimer = setTimeout(() => {
+    form.company.description = value;
+  }, 1000);
+};
 
 const handleSubmit = async () => {
   const updatedJob = {
@@ -69,6 +88,8 @@ onMounted(async () => {
     form.company.description = state.job.company.description;
     form.company.contactEmail = state.job.company.contactEmail;
     form.company.contactPhone = state.job.company.contactPhone;
+    // Initialize debounced input
+    companyDescriptionInput.value = state.job.company.description;
   } catch (error) {
     console.error('Error fetching job', error);
   } finally {
@@ -194,12 +215,22 @@ onMounted(async () => {
             >
             <textarea
               id="company_description"
-              v-model="form.company.description"
+              :value="companyDescriptionInput"
+              @input="handleCompanyDescriptionInput"
               name="company_description"
               class="border rounded w-full py-2 px-3"
               rows="4"
               placeholder="What does your company do?"
             ></textarea>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2"
+              >Company Description (Debounced - Updates after 3s)</label
+            >
+            <div class="border rounded w-full py-2 px-3 bg-gray-100 min-h-[100px] whitespace-pre-wrap">
+              {{ form.company.description || 'Waiting for input...' }}
+            </div>
           </div>
 
           <div class="mb-4">

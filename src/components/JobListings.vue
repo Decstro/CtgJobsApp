@@ -1,7 +1,8 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import JobListing from './JobListing.vue';
-import { reactive, defineProps, onMounted } from 'vue';
+import LateralModal from './LateralModal.vue';
+import { reactive, onMounted, ref } from 'vue';
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import axios from 'axios';
 
@@ -17,6 +18,16 @@ const state = reactive({
   jobs: [],
   isLoading: true,
 });
+
+const isModalOpen = ref(false);
+
+const openModal = () => {
+  isModalOpen.value = true;
+};
+
+const closeModal = () => {
+  isModalOpen.value = false;
+};
 
 onMounted(async () => {
   try {
@@ -52,11 +63,22 @@ onMounted(async () => {
     </div>
   </section>
 
-  <section v-if="showButton" class="m-auto max-w-lg my-10 px-6">
-    <RouterLink
-      to="/jobs"
-      class="block bg-indigo-950 text-white text-center py-4 px-6 rounded-xl hover:bg-gray-700"
-      >View All Jobs</RouterLink
-    >
+  <section v-if="showButton" class="m-auto max-w-4xl my-10 px-6">
+    <div class="flex gap-4 flex-col sm:flex-row">
+      <RouterLink
+        to="/jobs"
+        class="flex-1 bg-indigo-950 text-white text-center py-4 px-6 rounded-xl hover:bg-gray-700 transition-colors"
+        >View All Jobs</RouterLink
+      >
+      <button
+        @click="openModal"
+        class="flex-1 bg-[#5C0CB8] text-white text-center py-4 px-6 rounded-xl hover:bg-[#4A0A96] transition-colors font-medium"
+      >
+        Action Items
+      </button>
+    </div>
   </section>
+
+  <!-- Lateral Modal -->
+  <LateralModal :isOpen="isModalOpen" @close="closeModal" />
 </template>
